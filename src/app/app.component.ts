@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { catchError, map, Observable, of, startWith } from 'rxjs';
-import { DataState } from './enum/data-state';
-import { AppState } from './interfaces/app-state';
-import { CustomResponse } from './interfaces/custom-response';
-import { CrudService } from './services/crud.service';
+import { DataState } from './cineflix/enum/data-state';
+import { AppState } from './cineflix/interfaces/app-state';
+import { CustomResponse } from './cineflix/interfaces/custom-response';
+import { CrudService } from './cineflix/services/crud.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +12,7 @@ import { CrudService } from './services/crud.service';
 })
 export class AppComponent implements OnInit {
 
+  title = "Cineflix";
   appState$!: Observable<AppState<CustomResponse>>;
   constructor(private crudService: CrudService){}
 

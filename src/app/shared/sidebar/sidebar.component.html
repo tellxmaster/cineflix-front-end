@@ -1,0 +1,175 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-danger elevation-1">
+    <!-- Brand Logo -->
+    <a routerLink="cineflix/dashboard" class="brand-link text-decoration-none">
+        <img src="../../../favicon.ico" alt="Cineflix Logo" class="brand-image"
+            style="opacity: .8">
+        <span class="brand-text font-weight-light ">CINEFLIX</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user (optional) -->
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-header">Menú Principal</li>
+                <li class="nav-item">
+                    <a routerLink="cineflix/dashboard"
+                       routerLinkActive="active"
+                        class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a  routerLink="cineflix/perfil"
+                        routerLinkActive="active" 
+                        class="nav-link">
+                        <i class="nav-icon fas fa-fw fa-user-alt"></i>
+                        <p>
+                            Perfil
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">Panel de Control</li>
+                <li class="nav-item">
+                    <a  routerLink="cineflix/socios"
+                        routerLinkActive="active" 
+                        class="nav-link">
+                        <i class="nav-icon fas fa-handshake"></i>
+                        <p>
+                            Socios
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <i class="nav-icon fas fa-film"></i>
+                        <p>
+                            Peliculas
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a  routerLink="cineflix/peliculas"
+                                routerLinkActive="active" 
+                                class="nav-link">
+                                <i class="fas fa-video nav-icon"></i>
+                                <p>Gestionar Peliculas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="cineflix/generos"
+                                routerLinkActive="active"
+                                class="nav-link">
+                                <i class="fas fa-box-open nav-icon"></i>
+                                <p>Gestionar Categorias</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="cineflix/actores"
+                                routerLinkActive="active"
+                                class="nav-link">
+                                <i class="fas fa-user nav-icon"></i>
+                                <p>Gestionar Actores</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="cineflix/directores"
+                                routerLinkActive="active"
+                                class="nav-link">
+                                <i class="fas fa-video nav-icon"></i>
+                                <p>Gestionar Directores</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="cineflix/alquileres"
+                                routerLinkActive="active"
+                                class="nav-link">
+                                <i class="fas fa-dollar-sign nav-icon"></i>
+                                <p>Gestionar Alquileres</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li 
+                    class="nav-item">
+                    <a class="nav-link">
+                        <i class="nav-icon fas fa-wrench"></i>
+                        <p>
+                            Otros
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a routerLink="cineflix/sexos"
+                                routerLinkActive="active"
+                                class="nav-link">
+                                <i class="fas fa-mars-double nav-icon"></i>
+                                <p>Sexos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="cineflix/formatos"
+                                routerLinkActive="active" 
+                                class="nav-link">
+                                <i class="fas fa-file-video nav-icon"></i>
+                                <p>Formatos</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-header">Reportes</li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>
+                            Reportes
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="../forms/general.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Top 5 generos por mes</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../forms/advanced.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Alquileres por día</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../forms/editors.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Películas por género</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../forms/validation.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ingresos mensuales</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../forms/validation.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Reporte por socio</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
