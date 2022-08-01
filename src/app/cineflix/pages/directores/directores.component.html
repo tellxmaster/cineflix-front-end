@@ -1,1 +1,8 @@
-<p>directores works!</p>
+<div class="container-fluid">
+    <div class="col bg-light text-dark">
+        <h1>Directores</h1>
+        <div>
+            {{ appState$ | async | json }}
+        </div>
+    </div>
+</div>

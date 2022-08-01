@@ -1,9 +1,106 @@
 
 <div class="container-fluid">
-    <div class="col bg-light text-dark">
+    <!-- <div class="col bg-light text-dark">
         <h1>Socios</h1>
         <div>
             {{ appState$ | async | json }}
+        </div>
+    </div> -->
+        <div class="table-responsive-sm">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <h1>Socios</h1>
+                    </div>
+                    <div class="col col-sm-6">
+                        <a href="#addSocioModal" class="btn btn-danger float-right" data-toggle="modal">
+                            <i class="fas fa-plus"></i>
+                            <span>Añadir Socio</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <br>
+
+        <ng-container *ngIf="( appState$ | async ) as appState" [ngSwitch]="appState.dataState">
+            <ng-container *ngSwitchCase="DataState.LOADING_STATE">
+                <div class="col-md-12 single-note-item text-center">
+                    <div class="spinner-border text-danger" role="status"></div>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="DataState.LOADED_STATE">
+                <table class="table table-hover" id="socios">
+                    <thead class="bg-danger">
+                        <tr>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Cedula</th>
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Dirección</th>
+                            <th class="text-center">Telefono</th>
+                            <th class="text-center">Correo</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let socio of appState.appData?.data.socios; let i = index">
+                        <tr>
+                            <td class="text-center">{{socio.id}}</td>
+                            <td class="text-center">{{socio.cedula}}</td>
+                            <td class="text-center">{{socio.nombre}}</td>
+                            <td class="text-center">{{socio.direccion}}</td>
+                            <td class="text-center">{{socio.telefono}}</td>
+                            <td class="text-center">{{socio.correo}}</td>
+                            <td class="text-center">
+                                <a class="btn btn-success m-1"><i class="fas fa-pen"></i></a>
+                                <a class="btn btn-warning m-1"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-container>
+            <ng-container *ngSwitchCase="DataState.ERROR_STATE">
+                <div class="alert alert-danger">
+                    Error
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>
+
+<div id="addSocioModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="">
+                <div class="modal-header">
+                    <h4 class="modal-title">Añadir Socio</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="soc_cedula">Cedula</label>
+                        <input type="text" name="soc_cedula" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="soc_nombre">Nombre</label>
+                        <input type="text" name="soc_nombre" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="soc_direccion">Dirección</label>
+                        <input type="text" name="soc_direccion" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="soc_telefono">Telefono</label>
+                        <input type="text" name="soc_telefono" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="soc_correo">Correo</label>
+                        <input type="text" name="soc_correo" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-danger mr-2">Guardar</a>
+                        <a class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
