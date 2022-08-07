@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'cineflix',
+    path: 'dashboard',
     loadChildren: () => import('./cineflix/cineflix.module').then( m => m.CineflixModule )
   },
   {
@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'cineflix'
+    redirectTo: 'auth'
   }
 ];
 

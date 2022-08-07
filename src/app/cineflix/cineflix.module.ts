@@ -13,6 +13,9 @@ import { ActoresComponent } from './pages/actores/actores.component';
 import { SexosComponent } from './pages/sexos/sexos.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { SharedModule } from '../shared/shared.module';
+import { MainComponent } from './pages/main/main.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 @NgModule({
@@ -27,11 +30,14 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     ActoresComponent,
     SexosComponent,
     DashboardComponent,
-    SidenavComponent
+    SidenavComponent,
+    MainComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
-    CineflixRoutingModule
+    CineflixRoutingModule,
+    SharedModule
   ]
 })
 export class CineflixModule { }
