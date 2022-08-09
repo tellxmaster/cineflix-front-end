@@ -2880,3 +2880,8 @@
   -ms-align-items: center;
   align-items: center;
   }
+
+  .small-box:hover{
+    scale: 1.05;
+    transition: scale 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
