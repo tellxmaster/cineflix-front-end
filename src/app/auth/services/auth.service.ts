@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthResponse, Usuario } from '../interfaces/interfaces';
 import { catchError, map, tap } from 'rxjs/operators'
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 
 const TOKEN_KEY = 'AuthToken';
@@ -86,8 +86,15 @@ export class AuthService {
   }
 
   validarToken(){
-    const url = `${this.baseUrl}/auth/renew`
-    return this.http.get(url);
+    const url = `${this.baseUrl}/auth/renew`;
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('AuthToken') || '') 
+    return this.http.get<AuthResponse>(url, {headers})
+    .pipe(
+      map( res => {
+        return res.ok;
+      }),
+      catchError( err => err )
+    );
   }
 
 }

@@ -100,8 +100,8 @@
     text-transform: uppercase;
   }
   
-  .bg1 {background-color: #3b5998}
-  .bg2 {background-color: #1da1f2}
+  .bg1 {background-color: #983b3b}
+  .bg2 {background-color: #f21d1d}
   .bg3 {background-color: #ea4335}
   
   
@@ -283,8 +283,8 @@
     z-index: -1;
     width: 300%;
     height: 100%;
-    background: rgb(96,207,220);
-    background: linear-gradient(90deg, rgba(96,207,220,1) 0%, rgba(190,52,218,1) 92%);
+    background: rgb(196, 67, 67);
+    background: linear-gradient(90deg, rgb(247, 105, 105) 0%, rgb(255, 47, 47) 92%);
     top: 0;
     left: -100%;
   
