@@ -58,6 +58,10 @@ const routes: Routes = [
       { 
         path: '**', 
         redirectTo: 'dashboard'
+      },
+      {
+        path: 'perfil',
+        redirectTo: 'dashboard'
       }
     ]
   }
