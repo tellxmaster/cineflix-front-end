@@ -1,1 +1,281 @@
-<p>dashboard works!</p>
+<div class="container-fluid mt-3">
+    <div class="row">
+        <!-- Tarjeta Peliculas Agregadas -->
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+                <div class="inner d-flex">
+                    <div class="col">
+                        <div class="row">
+                            <h3 class="pl-1"> 33 </h3>
+                            <small style="position: absolute; padding-top: 1.05rem; padding-left: 3.2rem;"> mes </small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4><small> <b>Total:</b> 10</small></h4>
+                    </div>
+                </div>
+                <p class="pl-3">Peliculas agregadas </p>
+                <div class="icon">
+                    <i class="ion ion-ios-videocam"></i>
+                </div>
+                <a href="/pelicula" class="small-box-footer">Más información <i
+                        class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- Fin Tarjeta Peliculas Agregadas -->
+
+        <!-- Tarjeta Número Alquiler Mes -->
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner d-flex">
+                    <div class="col">
+                        <div class="row">
+                            <h3 class="pl-1"> 10 </h3>
+                            <small style="position: absolute; padding-top: 1.05rem; padding-left: 3.2rem;;"> mes </small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4><small> <b>Total:</b> 20 </small></h4>
+                    </div>
+                </div>
+                <p class="pl-3">Nuevos alquileres </p>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="/alquiler" class="small-box-footer">Más información <i
+                        class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- Fin Tarjeta Número Alquiler Mes -->
+
+        <!-- Tarjeta Número Socios Mes -->
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+                <div class="inner d-flex">
+                    <div class="col">
+                        <div class="row">
+                            <h3 class="pl-1"> 30 </h3>
+                            <small style="position: absolute; padding-top: 1.05rem; padding-left: 3.2rem;;"> mes </small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4><small> <b>Total:</b> 40 </small></h4>
+                    </div>
+                </div>
+                <p class="pl-3">Socios Nuevos</p>
+                <div class="icon">
+                    <i class="ion ion-android-person-add"></i>
+                </div>
+                <a href="/socio" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- Fin Tarjeta Número Socios Mes -->
+
+        <!-- Tarjeta Ingresos -->
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>30 $</h3>
+                    <p>Ingreso mes actual</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-cash"></i>
+                </div>
+                <a href="/genero" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- Fin Tarjeta Ingresos -->
+    </div>
+
+    <!-- Gráficas Estadisticas -->
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- Generos Disponibles en el inventario -->
+            <div class="card">
+                <div class="card-header border-0 bg-white">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title">Géneros disponibles en el Inventario</h3>
+                        <a href="/reporte-genero" class="btn btn-danger">Generar Reporte</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex">
+                        <p class="d-flex flex-column">
+                            <span class="text-bold text-lg">60</span>
+                            <span>Total de peliculas en el inventario</span>
+                        </p>
+                        <p class="ml-auto d-flex flex-column text-right">
+                            <span class="text-success">
+                                <i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="text-muted"></span>
+                        </p>
+                    </div>
+                    <div class="position-relative mb-4">
+                        <canvas id="categoryChart"
+                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Generos Disponibles en el inventario -->
+            <!-- 3 Ultimos alquileres realizados -->
+            <div class="card">
+                <div class="card-header border-0 bg-white">
+                    <h3 class="card-title">Ultimos Alquileres</h3>
+                    <div class="card-tools">
+                        <a href="#" class="btn btn-tool btn-sm">
+                            <i class="fas fa-download"></i>
+                        </a>
+                        <a href="#" class="btn btn-tool btn-sm">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-striped table-valign-middle">
+                        <thead class="thead">
+                            <tr>
+                                <th>Socio</th>
+                                <th>Pelicula</th>
+                                <th>Valor</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td>soc_nombre</td>
+                                    <td>pel_nombre</td>
+                                    <td>alq_valor</td>
+                                    <td width="90" class="text-center">
+                                        <a href="/alquiler" class="text-gray"><i class="fas fa-eye"></i></a>
+                                    </td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Fin 3 Ultimos alquileres realizados -->
+
+        <!-- Gráfica Socios Registrados -->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header border-0 bg-white">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title">Socios Registrados</h3>
+                        <a href="/reporte-socio" class="btn btn-danger">Generar Reporte</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex">
+                        <p class="d-flex flex-column">
+                            <span class="text-bold text-lg">30</span>
+                            <span>Total socios registrados</span>
+                        </p>
+                        <p class="ml-auto d-flex flex-column text-right">
+                            <span class="text-success">
+                                <i class="fas fa-arrow-up"></i>100%
+                            </span>
+                            <span class="text-muted">Respecto al Mes</span>
+                        </p>
+                    </div>
+
+                    <div class="position-relative mb-4">
+                        <canvas class="chart" id="membersChart"
+                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Fin Gráfica Socios Registrados -->
+
+            <!-- Pelicula más alquilada -->
+            <div class="card">
+                <div class="card-header border-0 bg-white">
+                    <h3 class="card-title">Top Pelicula más Alquiladas</h3>
+                    <div class="card-tools">
+                        <a href="#" class="btn btn-sm btn-tool">
+                            <i class="fas fa-download"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-tool">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body d-flex">
+                    <div class="col-9">
+                        <h2>top_pelicula_nombre</h2>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                <p><b>Veces Alquiladas: </b>10</p>
+                                <p><b>Estreno: </b>2000-12-02</p>
+                            </div>
+                            <div class="col">
+                                <p><b>Ingresos Generados</b></p>
+                                <p class="text-success"><b>300.50$<i
+                                            class="ion ion-ios-paper text-success"></i></b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img src="cineflix" alt="pelicula_top" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FIn Pelicula más alquilada -->
+
+        <!-- Gráfica peliculas alquiladas por mes -->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header border-0 bg-white">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title">Alquileres de Peliculas</h3>
+                        <a href="javascript:void(0);" class="btn btn-danger">Generar Reporte</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex">
+                        <p class="d-flex flex-column">
+                            <span class="text-bold text-lg">20</span>
+                            <span>Total Alquileres</span>
+                        </p>
+                        <p class="ml-auto d-flex flex-column text-right">
+                            <span class="text-success">
+                                <i class="fas fa-arrow-up"></i>200%
+                            </span>
+                            <span class="text-muted">Respecto al Mes</span>
+                        </p>
+                    </div>
+
+                    <div class="position-relative mb-4">
+                        <canvas id="alquileres-chart" style="height: 300px;"></canvas>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Fin Gráfica peliculas alquiladas por mes -->
+
+        <!-- Tabla tiempo restante alquileres  -->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header border-0 bg-white">
+                    <h3 class="card-title">Tiempo restante de alquileres</h3>
+                    <div class="card-tools">
+                        <a href="#" class="btn btn-tool btn-sm">
+                            <i class="fas fa-download"></i>
+                        </a>
+                        <a href="#" class="btn btn-tool btn-sm">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    </div>
+                </div>
+         
+
+            </div>
+        </div>
+    </div>
+    <!-- Fin Tabla tiempo restante alquileres  -->
+<!-- Fin Dashboard  -->
+</div>
