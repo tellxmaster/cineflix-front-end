@@ -5,7 +5,9 @@ import { CustomResponse } from '../interfaces/custom-response';
 import { Socio } from '../interfaces/socio';
 import { Actor } from '../interfaces/actor';
 import { Director } from '../interfaces/director';
+import { Pelicula } from '../interfaces/pelicula';
 import { Sexo } from '../interfaces/sexo';
+
 
 @Injectable({
   providedIn: 'root'
@@ -118,4 +120,28 @@ export class CrudService {
     console.log(error);
     return throwError(`Ocurrio un Error - Codigo: ${error.status}`);
   }
+
+  //PELICULAS
+  peliculas$ = <Observable<CustomResponse>>
+  this.http.get<CustomResponse>(`${this.apiURL}/pelicula/list`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  savePelicula$ = (pelicula: Pelicula) => <Observable<CustomResponse>>
+  this.http.post<CustomResponse>(`${this.apiURL}/pelicula/save`, pelicula)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  deletePelicula$ = (peliculaId: number) => <Observable<CustomResponse>>
+  this.http.delete<CustomResponse>(`${this.apiURL}/pelicula/delete/${peliculaId}`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  //FIN PELICULAS
 }

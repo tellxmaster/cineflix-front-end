@@ -18,6 +18,7 @@ import { MainComponent } from './pages/main/main.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
 
+
 @NgModule({
   declarations: [
     SociosComponent,

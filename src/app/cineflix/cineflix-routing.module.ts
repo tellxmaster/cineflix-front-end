@@ -71,8 +71,9 @@ const routes: Routes = [
           }
         ]
       },
-      { 
-        path: '**', 
+      {
+        path: 'perfil',
+        redirectTo: 'dashboard'
         redirectTo: ''
       }
     ]
