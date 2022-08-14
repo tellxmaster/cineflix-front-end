@@ -35,7 +35,7 @@
   
   a:hover {
       text-decoration: none;
-    color: #a64bf4;
+    color: #f44b4b;
   }
   
   /*---------------------------------------------*/
@@ -99,6 +99,11 @@
     color: #333333;
     text-transform: uppercase;
   }
+
+  .txt2:hover {
+    color: #f44b4b;
+  }
+  
   
   .bg1 {background-color: #983b3b}
   .bg2 {background-color: #f21d1d}
@@ -242,11 +247,11 @@
   }
   
   .input100:focus + .focus-input100::after {
-    color: #a64bf4;
+    color: #f44b4b;
   }
   
   .has-val.input100 + .focus-input100::after {
-    color: #a64bf4;
+    color: #f44b4b;
   }
   
   

@@ -6,14 +6,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./cineflix/cineflix.module').then( m => m.CineflixModule ),
-    canActivate: [ ValidarTokenGuard ],
-    canLoad: [ ValidarTokenGuard ]
+    canActivate: [ ValidarTokenGuard ]
   },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule ),
-    canActivate: [ ValidarTokenGuard ],
-    canLoad: [ ValidarTokenGuard ]
   },
   {
     path: '**',
