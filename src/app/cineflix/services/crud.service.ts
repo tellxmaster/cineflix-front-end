@@ -6,6 +6,7 @@ import { Socio } from '../interfaces/socio';
 import { Actor } from '../interfaces/actor';
 import { Director } from '../interfaces/director';
 import { Pelicula } from '../interfaces/pelicula';
+import { Genero } from '../interfaces/genero';
 
 @Injectable({
   providedIn: 'root'
@@ -117,4 +118,28 @@ export class CrudService {
   );
 
   //FIN PELICULAS
+
+  //GENEROS
+  generos$ = <Observable<CustomResponse>>
+  this.http.get<CustomResponse>(`${this.apiURL}/genero/list`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  saveGenero$ = (genero: Genero) => <Observable<CustomResponse>>
+  this.http.post<CustomResponse>(`${this.apiURL}/genero/save`, genero)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  deleteGenero$ = (generoId: number) => <Observable<CustomResponse>>
+  this.http.delete<CustomResponse>(`${this.apiURL}/genero/delete/${generoId}`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  //FIN GENEROS
 }
