@@ -1,11 +1,5 @@
 
 <div class="container-fluid">
-    <!-- <div class="col bg-light text-dark">
-        <h1>Socios</h1>
-        <div>
-            {{ appState$ | async | json }}
-        </div>
-    </div> -->
         <div class="table-responsive-sm">
             <div class="table-title">
                 <div class="row">
@@ -14,7 +8,7 @@
                     </div>
                     <div class="col col-sm-6">
                         <a href="#addSocioModal" class="btn btn-danger float-right" data-toggle="modal">
-                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-plus mr-2"></i>
                             <span>Añadir Socio</span>
                         </a>
                     </div>
@@ -59,7 +53,7 @@
             </ng-container>
             <ng-container *ngSwitchCase="DataState.ERROR_STATE">
                 <div class="alert alert-danger">
-                    Error
+                    {{ appState.error }}
                 </div>
             </ng-container>
         </ng-container>
@@ -69,35 +63,40 @@
 <div id="addSocioModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="">
+            <form [formGroup]="SocioForm"
+                 autocomplete="off">
                 <div class="modal-header">
-                    <h4 class="modal-title">Añadir Socio</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Añadir Socio <i class="fas fa-users"></i></h4>
+                    <button type="button" class="close" data-dismiss="modal" id="closeModal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="soc_cedula">Cedula</label>
-                        <input type="text" name="soc_cedula" class="form-control" required>
+                        <label for="soc_cedula">Cédula</label>
+                        <input type="text" name="soc_cedula" formControlName="soc_cedula" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="soc_nombre">Nombre</label>
-                        <input type="text" name="soc_nombre" class="form-control" required>
+                        <input type="text" name="soc_nombre" formControlName="soc_nombre" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="soc_direccion">Dirección</label>
-                        <input type="text" name="soc_direccion" class="form-control" required>
+                        <input type="text" name="soc_direccion" formControlName="soc_direccion" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="soc_telefono">Telefono</label>
-                        <input type="text" name="soc_telefono" class="form-control" required>
+                        <input type="text" name="soc_telefono" formControlName="soc_telefono" class="form-control" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-4">
                         <label for="soc_correo">Correo</label>
-                        <input type="text" name="soc_correo" class="form-control" required>
+                        <input type="text" name="soc_correo" formControlName="soc_correo" class="form-control" required>
                     </div>
-                    <div class="form-group">
-                        <a class="btn btn-danger mr-2">Guardar</a>
-                        <a class="btn btn-secondary">Cancelar</a>
+                    <div class="form-group float-right">
+                        <button class="btn btn-danger mr-3" type="submit" [disabled]="SocioForm.invalid || (isLoading$ | async)">
+                            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+                            <span *ngIf="isLoading$ | async">Guardando...</span>
+                            <span *ngIf="!(isLoading$ | async)">Guardar</span>
+                        </button>
+                        <a class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Cancelar</a>
                     </div>
                 </div>
             </form>

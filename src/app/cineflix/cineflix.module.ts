@@ -13,7 +13,11 @@ import { ActoresComponent } from './pages/actores/actores.component';
 import { SexosComponent } from './pages/sexos/sexos.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { PerfilComponent } from './pages/perfil/perfil.component';
+import { SharedModule } from '../shared/shared.module';
+import { MainComponent } from './pages/main/main.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -29,11 +33,14 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
     SexosComponent,
     DashboardComponent,
     SidenavComponent,
-    PerfilComponent
+    MainComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
-    CineflixRoutingModule
+    CineflixRoutingModule,
+    SharedModule,
+    ReactiveFormsModule,
   ]
 })
 export class CineflixModule { }
