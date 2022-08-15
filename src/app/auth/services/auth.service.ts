@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthResponse, Usuario } from '../interfaces/interfaces';
 import { catchError, map, tap } from 'rxjs/operators'
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 
 const TOKEN_KEY = 'AuthToken';
@@ -50,11 +50,12 @@ export class AuthService {
   }
 
   public getAuthorities(): string[]{
+    
     this.roles = [];
 
     if (localStorage.getItem(AUTHORITIES_KEY)) {
-      JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)!).forEach((authority: any) => {
-        this.roles.push(authority);
+      JSON.parse(localStorage.getItem(AUTHORITIES_KEY)!).forEach((authority: any) => {
+        this.roles.push(authority.authority);
       });
     }
     return this.roles;
@@ -82,18 +83,6 @@ export class AuthService {
       }),
       map( res => res.ok ),
       catchError( err => of(err) )
-    );
-  }
-
-  validarToken(){
-    const url = `${this.baseUrl}/auth/renew`;
-    const headers = new HttpHeaders().set('x-token', localStorage.getItem('AuthToken') || '') 
-    return this.http.get<AuthResponse>(url, {headers})
-    .pipe(
-      map( res => {
-        return res.ok;
-      }),
-      catchError( err => err )
     );
   }
 
