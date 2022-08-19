@@ -30,7 +30,7 @@ const routes: Routes = [
             component: ProfileComponent
           },
           { 
-            path: 'socios', 
+            path: 'socios/:page', 
             component: SociosComponent
           },
           { 

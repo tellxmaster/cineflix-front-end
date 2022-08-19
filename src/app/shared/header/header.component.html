@@ -5,7 +5,7 @@
         <li class="nav-item ml-3">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        
+
     </ul>
 
     <!-- Right navbar links -->
@@ -33,7 +33,7 @@
             </div>
         </li>
 
-        
+
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                 <i class="fas fa-expand-arrows-alt"></i>
@@ -42,22 +42,23 @@
 
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
+            <a class="nav-link mr-5" data-toggle="dropdown" href="#">
+                <img src="../../../assets/images/icons/user-icon.png" alt="user-image" width="22" class="mr-1">
                 {{username}}
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                
+
                 <a class="dropdown-item">
                     <i class="fas fa-envelope mr-2"></i> Perfil
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" (click)="logout()">
-                    <i class="fas fa-users mr-2"></i> Cerrar Sesión
+                    <i class="ion ion-log-out mr-2"></i> Cerrar Sesión
                 </a>
-                
+
             </div>
         </li>
-        
+
     </ul>
 </nav>
 <!-- /.navbar -->

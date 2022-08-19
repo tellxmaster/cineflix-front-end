@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { CustomResponse } from '../interfaces/custom-response';
 import { Socio, SocioSend } from '../interfaces/socio';
 import { Actor } from '../interfaces/actor';
 import { Director } from '../interfaces/director';
 import { Sexo } from '../interfaces/sexo';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,13 @@ import { Sexo } from '../interfaces/sexo';
 export class CrudService {
 
   private readonly apiURL = 'http://localhost:8080';
+  private page = 0;
   
   constructor(private http: HttpClient) { }
 
   //ACTORES
   actores$ = <Observable<CustomResponse>>
-  this.http.get<CustomResponse>(`${this.apiURL}/actor/list`)
+  this.http.get<CustomResponse>(`${this.apiURL}/actor/list/${this.page}`)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
@@ -67,7 +69,7 @@ export class CrudService {
 
   //SOCIOS
   socios$ = <Observable<CustomResponse>>
-  this.http.get<CustomResponse>(`${this.apiURL}/socio/list`)
+  this.http.get<CustomResponse>(`${this.apiURL}/socio/list/${this.page}`)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
@@ -117,5 +119,9 @@ export class CrudService {
   private handleError(error: HttpErrorResponse): Observable<never>{
     console.log(error);
     return throwError(`Ocurrio un Error - Codigo: ${error.status}`);
+  }
+
+  public setPage(page: any){
+    this.page = page;
   }
 }

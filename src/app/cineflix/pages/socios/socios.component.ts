@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, catchError, map, Observable, of, startWith } from 'rxjs';
 import { DataState } from '../../../cineflix/enum/data-state';
 import { AppState } from '../../../cineflix/interfaces/app-state';
@@ -32,20 +33,23 @@ export class SociosComponent implements OnInit {
     correo:    ['', [Validators.required, Validators.email]],
   });
 
-  constructor(private crudService: CrudService, private fb: FormBuilder){}
-
+  constructor(private crudService: CrudService, private fb: FormBuilder, private _Activatedroute: ActivatedRoute){}
   ngOnInit(): void{
     this.appState$ = this.crudService.socios$
     .pipe(
       map(response => {
         this.dataSubject.next(response);
-        return { dataState: DataState.LOADED_STATE, appData: response }
+        return { dataState: DataState.LOADED_STATE, appData: {...response, data: { socios: response.data.socios.reverse() }} }
       }),
       startWith({ dataState: DataState.LOADING_STATE }),
       catchError((error: String) => {
         return of({ dataState: DataState.ERROR_STATE, error: error })
       })
     );
+  }
+
+  changePage(){
+    this.crudService.setPage(this._Activatedroute.snapshot.paramMap.get("page"));
   }
 
   saveSocio(){
@@ -60,6 +64,7 @@ export class SociosComponent implements OnInit {
         document.getElementById('closeModal')!.click();
         this.SocioForm.reset(this.SocioForm.value);
         this.isLoading.next(false);
+        
         return {dataState: DataState.LOADED_STATE, appData: this.dataSubject.value}
       }),
       startWith({ dataState: DataState.LOADING_STATE, appData: this.dataSubject.value }),

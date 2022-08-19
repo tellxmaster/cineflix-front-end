@@ -1,5 +1,5 @@
 
-<div class="container-fluid">
+<div class="container-fluid animate__animated animate__rollIn">
         <div class="table-responsive-sm">
             <div class="table-title">
                 <div class="row">
@@ -50,6 +50,19 @@
                         </tr>
                     </tbody>
                 </table>
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" routerLink="/dashboard/socios/0" routerLinkActive="active">1</a></li>
+                        <li class="page-item"><a class="page-link" routerLink="/dashboard/socios/1" routerLinkActive="active">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </ng-container>
             <ng-container *ngSwitchCase="DataState.ERROR_STATE">
                 <div class="alert alert-danger">
