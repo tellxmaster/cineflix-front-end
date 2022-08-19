@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -17,12 +19,19 @@ export class RegisterComponent{
     password:        ['', [Validators.required, Validators.minLength(8)]]
   });
 
-  constructor( private fb: FormBuilder, private router: Router  ){}
+  constructor( private fb: FormBuilder, private router: Router, private authService: AuthService ){}
 
   register(){
-    console.log(this.RegisterForm.value);
-    console.log(this.RegisterForm.valid);
-    this.router.navigateByUrl('/dashboard');
+    const {nombre, nombreUsuario, email, password } = this.RegisterForm.value;
+    this.authService.registro(nombre, nombreUsuario, email, password)
+    .subscribe(mensaje => {
+      console.log(mensaje);
+      if( mensaje === "usuario guardado" ){
+        this.router.navigate(['/auth/login']);
+      }else{
+        Swal.fire('Error',mensaje, 'error');
+      }
+    })
   }
 
 }

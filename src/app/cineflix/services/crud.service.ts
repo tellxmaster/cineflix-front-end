@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { CustomResponse } from '../interfaces/custom-response';
-import { Socio } from '../interfaces/socio';
+import { Socio, SocioSend } from '../interfaces/socio';
 import { Actor } from '../interfaces/actor';
 import { Director } from '../interfaces/director';
 import { Pelicula } from '../interfaces/pelicula';
 import { Genero } from '../interfaces/genero';
 import { Sexo } from '../interfaces/sexo';
+import { Alquiler } from '../interfaces/alquiler';
 
 
 
@@ -76,7 +77,7 @@ export class CrudService {
     catchError(this.handleError)
   );
 
-  saveSocio$ = (socio: Socio) => <Observable<CustomResponse>>
+  saveSocio$ = (socio: SocioSend) => <Observable<CustomResponse>>
   this.http.post<CustomResponse>(`${this.apiURL}/socio/save`, socio)
   .pipe(
     tap(console.log),
@@ -169,5 +170,29 @@ export class CrudService {
   );
 
   //FIN GENEROS
+
+   //ALQUILERES
+   alquileres$ = <Observable<CustomResponse>>
+   this.http.get<CustomResponse>(`${this.apiURL}/alquiler/list`)
+   .pipe(
+     tap(console.log),
+     catchError(this.handleError)
+   );
+ 
+   saveAlquiler$ = (alquiler: Alquiler) => <Observable<CustomResponse>>
+   this.http.post<CustomResponse>(`${this.apiURL}/alquiler/save`, alquiler)
+   .pipe(
+     tap(console.log),
+     catchError(this.handleError)
+   );
+ 
+   deleteAlquiler$ = (alquilerId: number) => <Observable<CustomResponse>>
+   this.http.delete<CustomResponse>(`${this.apiURL}/alquiler/delete/${alquilerId}`)
+   .pipe(
+     tap(console.log),
+     catchError(this.handleError)
+   );
+ 
+   //FIN ALQUILERES
 
 }

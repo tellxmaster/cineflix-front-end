@@ -17,18 +17,19 @@ import { Socio } from '../../interfaces/socio';
 export class SociosComponent implements OnInit {
 
   appState$!: Observable<AppState<CustomResponse>>;
+  readonly DataState = DataState;
   private dataSubject = new BehaviorSubject<CustomResponse>(null!);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
 
-  readonly DataState = DataState;
+  
 
   SocioForm: FormGroup = this.fb.group({
-    soc_cedula:    ['', [Validators.required, Validators.minLength(10)]],
-    soc_nombre:    ['', [Validators.required, Validators.minLength(8)]],
-    soc_direccion: ['', [Validators.required]],
-    soc_telefono:  ['', [Validators.required, Validators.minLength(10)]],
-    soc_correo:    ['', [Validators.required, Validators.email]],
+    cedula:    ['', [Validators.required, Validators.minLength(10)]],
+    nombre:    ['', [Validators.required, Validators.minLength(8)]],
+    direccion: ['', [Validators.required]],
+    telefono:  ['', [Validators.required, Validators.minLength(10)]],
+    correo:    ['', [Validators.required, Validators.email]],
   });
 
   constructor(private crudService: CrudService, private fb: FormBuilder){}
@@ -37,6 +38,7 @@ export class SociosComponent implements OnInit {
     this.appState$ = this.crudService.socios$
     .pipe(
       map(response => {
+        this.dataSubject.next(response);
         return { dataState: DataState.LOADED_STATE, appData: response }
       }),
       startWith({ dataState: DataState.LOADING_STATE }),
@@ -46,26 +48,26 @@ export class SociosComponent implements OnInit {
     );
   }
 
- /* saveSocio(){
+  saveSocio(){
     this.isLoading.next(true);
     console.log(this.SocioForm.value);
     this.appState$ = this.crudService.saveSocio$(this.SocioForm.value as Socio)
     .pipe(
       map(response => {
         this.dataSubject.next(
-          {...response, data: { socios: [response.data.socio, ...this.dataSubject.value.data.socios]}}
+          {...response, data: { socios: [response.data.socio, ...this.dataSubject.value.data.socios] } }
         );
         document.getElementById('closeModal')!.click();
         this.SocioForm.reset(this.SocioForm.value);
         this.isLoading.next(false);
         return {dataState: DataState.LOADED_STATE, appData: this.dataSubject.value}
       }),
-      startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
+      startWith({ dataState: DataState.LOADING_STATE, appData: this.dataSubject.value }),
       catchError((error: string) => {
         this.isLoading.next(false);
         return of({dataState: DataState.ERROR_STATE, error})
       })
     );
-  }*/
+  }
 
 }

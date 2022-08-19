@@ -1,3 +1,5 @@
+import { Socio } from "./socio";
+
 export interface CustomResponse {
     timestamp: Date;
     statusCode: number;

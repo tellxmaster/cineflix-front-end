@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { AuthResponse, Usuario } from '../interfaces/interfaces';
+import { AuthResponse, RegisterResponse, Usuario } from '../interfaces/interfaces';
 import { catchError, map, tap } from 'rxjs/operators'
 import { of } from 'rxjs';
 
@@ -65,24 +65,39 @@ export class AuthService {
   login( nombreUsuario: string, password: string ){
     
     const url = `${this.baseUrl}/auth/login`;
-    const body = { nombreUsuario, password }
+    const body = { nombreUsuario, password };
 
     return this.http.post<AuthResponse>(url, body)
     .pipe(
       tap( res =>{
-        if(res.ok){
+        if(res.token){
           this.setToken(res.token);
           this.setUserName(res.nombreUsuario);
           this.setAuthorities(res.authorities);
           this._usuario = {
-            ok: res.ok,
             nombreUsuario: res.nombreUsuario,
             token: res.token
           }
         }
       }),
-      map( res => res.ok ),
-      catchError( err => of(err) )
+      map( res => res.token ),
+      catchError( mensaje => of(mensaje) )
+    );
+  }
+
+  registro(nombre: string, nombreUsuario: string, email: string, password: string){
+    const url = `${this.baseUrl}/auth/nuevo`;
+    const body = { nombre, nombreUsuario, email, password};
+
+    return this.http.post<RegisterResponse>(url, body)
+    .pipe(
+      tap( res =>{
+        if(res.mensaje === "usuario guardado"){
+          console.log(res.mensaje);
+        }
+      }),
+      map( res => res.mensaje ),
+      catchError( mensaje => of(mensaje) )
     );
   }
 

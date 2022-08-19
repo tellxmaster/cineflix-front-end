@@ -22,11 +22,11 @@ export class LoginComponent{
   login(){
     const {nombreUsuario, password } = this.LoginForm.value;
     this.authService.login(nombreUsuario,password)
-    .subscribe(ok => {
-      if( ok === true ){
+    .subscribe(res => {
+      if( res != null){
         this.router.navigate(['/dashboard/stats']);
       }else{
-        Swal.fire('Error',ok, 'error');
+        Swal.fire('Error',res, 'error');
       }
     })
     
