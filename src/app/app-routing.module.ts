@@ -5,8 +5,8 @@ import { ValidarTokenGuard } from './guards/validar-token.guard';
 const routes: Routes = [
   {
     path: 'dashboard',
-    loadChildren: () => import('./cineflix/cineflix.module').then( m => m.CineflixModule ),
-    canActivate: [ ValidarTokenGuard ]
+    loadChildren: () => import('./cineflix/cineflix.module').then( m => m.CineflixModule )
+    
   },
   {
     path: 'auth',

@@ -1,10 +1,4 @@
 <div class="container-fluid">
-    <!-- <div class="col bg-light text-dark">
-        <h1>Socios</h1>
-        <div>
-            {{ appState$ | async | json }}
-        </div>
-    </div> -->
         <div class="table-responsive-sm">
             <div class="table-title">
                 <div class="row">
@@ -65,28 +59,32 @@
         <div class="modal-content">
             <form action="">
                 <div class="modal-header">
-                    <h4 class="modal-title">Añadir Socio</h4>
+                    <h4 class="modal-title">Añadir Pelicula</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="soc_cedula">Cedula</label>
+                        <label for="soc_cedula">Nombre</label>
                         <input type="text" name="soc_cedula" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="soc_nombre">Nombre</label>
+                        <label for="soc_nombre">Costo</label>
                         <input type="text" name="soc_nombre" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="soc_direccion">Dirección</label>
-                        <input type="text" name="soc_direccion" class="form-control" required>
+                        <label for="soc_direccion">Fecha de estreno</label>
+                        <input type="date" name="pel_fecha_est" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="soc_telefono">Telefono</label>
+                        <label for="soc_telefono">Director</label>
                         <input type="text" name="soc_telefono" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="soc_correo">Correo</label>
+                        <label for="soc_correo">Formato</label>
+                        <input type="text" name="soc_correo" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="soc_correo">Genero</label>
                         <input type="text" name="soc_correo" class="form-control" required>
                     </div>
                     <div class="form-group">
@@ -95,6 +93,6 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div>  
     </div>
 </div>

@@ -13,6 +13,7 @@ import { CrudService } from '../../../cineflix/services/crud.service';
 export class DirectoresComponent implements OnInit {
 
   appState$!: Observable<AppState<CustomResponse>>;
+  readonly DataState = DataState;
   constructor(private crudService: CrudService){}
 
   ngOnInit(): void{
