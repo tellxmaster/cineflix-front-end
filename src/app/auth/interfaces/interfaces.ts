@@ -1,13 +1,16 @@
 export interface AuthResponse{
-    ok: boolean;
     token: string;
     bearer: string;
     nombreUsuario: string;
     authorities: string[];
+    mensaje?: string;
+}
+
+export interface RegisterResponse{
+    mensaje: string;
 }
 
 export interface Usuario{
-    ok: Boolean;
     token: string;
     nombreUsuario: string;
 }

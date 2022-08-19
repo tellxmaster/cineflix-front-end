@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { BehaviorSubject, catchError, map, Observable, of, startWith } from 'rxjs';
 import { DataState } from '../../../cineflix/enum/data-state';
 import { AppState } from '../../../cineflix/interfaces/app-state';
@@ -24,11 +24,11 @@ export class SociosComponent implements OnInit {
   readonly DataState = DataState;
 
   SocioForm: FormGroup = this.fb.group({
-    soc_cedula:    ['', [Validators.required, Validators.minLength(10)]],
-    soc_nombre:    ['', [Validators.required, Validators.minLength(8)]],
-    soc_direccion: ['', [Validators.required]],
-    soc_telefono:  ['', [Validators.required, Validators.minLength(10)]],
-    soc_correo:    ['', [Validators.required, Validators.email]],
+    cedula:    ['', [Validators.required, Validators.minLength(10)]],
+    nombre:    ['', [Validators.required, Validators.minLength(8)]],
+    direccion: ['', [Validators.required]],
+    telefono:  ['', [Validators.required, Validators.minLength(10)]],
+    correo:    ['', [Validators.required, Validators.email]],
   });
 
   constructor(private crudService: CrudService, private fb: FormBuilder){}
@@ -46,15 +46,23 @@ export class SociosComponent implements OnInit {
     );
   }
 
-  saveSocio(){
+  saveSocio(): void{
     this.isLoading.next(true);
     console.log(this.SocioForm.value);
-    this.appState$ = this.crudService.saveSocio$(this.SocioForm.value as Socio)
+    const { cedula, nombre, direccion, telefono, correo } = this.SocioForm.value;
+    this.appState$ = this.crudService.saveSocio$({
+    cedula,
+      "nombre": nombre,
+      "direccion": direccion,
+      "telefono":telefono,
+      "correo": correo,
+      "created_at": new Date(),
+      "updated_at": new Date()
+    })
     .pipe(
       map(response => {
-        this.dataSubject.next(
-          {...response, data: { socios: [response.data.socio, ...this.dataSubject.value.data.socios]}}
-        );
+        console.log(response);
+        this.dataSubject.next(response);
         document.getElementById('closeModal')!.click();
         this.SocioForm.reset(this.SocioForm.value);
         this.isLoading.next(false);

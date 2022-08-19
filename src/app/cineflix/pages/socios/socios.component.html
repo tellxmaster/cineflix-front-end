@@ -64,32 +64,32 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form [formGroup]="SocioForm"
-                 (ngSubmit)="saveSocio()"
-                 autocomplete="off">
+                (ngSubmit)="saveSocio()"
+                autocomplete="off">
                 <div class="modal-header">
                     <h4 class="modal-title">Añadir Socio <i class="fas fa-users"></i></h4>
                     <button type="button" class="close" data-dismiss="modal" id="closeModal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="soc_cedula">Cédula</label>
-                        <input type="text" name="soc_cedula" formControlName="soc_cedula" class="form-control" required>
+                        <label for="cedula">Cédula</label>
+                        <input type="text" name="cedula" formControlName="cedula" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="soc_nombre">Nombre</label>
-                        <input type="text" name="soc_nombre" formControlName="soc_nombre" class="form-control" required>
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" formControlName="nombre" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="soc_direccion">Dirección</label>
-                        <input type="text" name="soc_direccion" formControlName="soc_direccion" class="form-control" required>
+                        <label for="direccion">Dirección</label>
+                        <input type="text" name="direccion" formControlName="direccion" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="soc_telefono">Telefono</label>
-                        <input type="text" name="soc_telefono" formControlName="soc_telefono" class="form-control" required>
+                        <label for="telefono">Telefono</label>
+                        <input type="text" name="telefono" formControlName="telefono" class="form-control" required>
                     </div>
                     <div class="form-group mb-4">
-                        <label for="soc_correo">Correo</label>
-                        <input type="text" name="soc_correo" formControlName="soc_correo" class="form-control" required>
+                        <label for="correo">Correo</label>
+                        <input type="text" name="correo" formControlName="correo" class="form-control" required>
                     </div>
                     <div class="form-group float-right">
                         <button class="btn btn-danger mr-3" type="submit" [disabled]="SocioForm.invalid || (isLoading$ | async)">

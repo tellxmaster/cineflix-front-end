@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { CustomResponse } from '../interfaces/custom-response';
-import { Socio } from '../interfaces/socio';
+import { Socio, SocioSend } from '../interfaces/socio';
 import { Actor } from '../interfaces/actor';
 import { Director } from '../interfaces/director';
 import { Sexo } from '../interfaces/sexo';
@@ -73,7 +73,7 @@ export class CrudService {
     catchError(this.handleError)
   );
 
-  saveSocio$ = (socio: Socio) => <Observable<CustomResponse>>
+  saveSocio$ = (socio: SocioSend) => <Observable<CustomResponse>>
   this.http.post<CustomResponse>(`${this.apiURL}/socio/save`, socio)
   .pipe(
     tap(console.log),
