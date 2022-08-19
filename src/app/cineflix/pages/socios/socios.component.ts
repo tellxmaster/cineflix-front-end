@@ -52,6 +52,9 @@ export class SociosComponent implements OnInit {
     this.appState$ = this.crudService.saveSocio$(this.SocioForm.value as Socio)
     .pipe(
       map(response => {
+        this.dataSubject.next(
+          {...response, data: { socios: [response.data.socio, ...this.dataSubject.value.data.socio]}}
+        );
         console.log(response);
         document.getElementById('closeModal')!.click();
         this.SocioForm.reset(this.SocioForm.value);

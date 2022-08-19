@@ -97,7 +97,7 @@ export class AuthService {
         }
       }),
       map( res => res.mensaje ),
-      catchError( err => of(err) )
+      catchError( mensaje => of(mensaje) )
     );
   }
 
