@@ -27,7 +27,7 @@ export class RegisterComponent{
     .subscribe(mensaje => {
       console.log(mensaje);
       if( mensaje === "usuario guardado" ){
-        this.router.navigate(['/dashboard/stats']);
+        this.router.navigate(['/auth/login']);
       }else{
         Swal.fire('Error',mensaje, 'error');
       }

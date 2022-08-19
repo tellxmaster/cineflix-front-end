@@ -17,11 +17,12 @@ import { Socio } from '../../interfaces/socio';
 export class SociosComponent implements OnInit {
 
   appState$!: Observable<AppState<CustomResponse>>;
+  readonly DataState = DataState;
   private dataSubject = new BehaviorSubject<CustomResponse>(null!);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
 
-  readonly DataState = DataState;
+  
 
   SocioForm: FormGroup = this.fb.group({
     cedula:    ['', [Validators.required, Validators.minLength(10)]],
@@ -37,6 +38,7 @@ export class SociosComponent implements OnInit {
     this.appState$ = this.crudService.socios$
     .pipe(
       map(response => {
+        this.dataSubject.next(response);
         return { dataState: DataState.LOADED_STATE, appData: response }
       }),
       startWith({ dataState: DataState.LOADING_STATE }),
@@ -53,15 +55,14 @@ export class SociosComponent implements OnInit {
     .pipe(
       map(response => {
         this.dataSubject.next(
-          {...response, data: { socios: [response.data.socio, ...this.dataSubject.value.data.socio]}}
+          {...response, data: { socios: [response.data.socio, ...this.dataSubject.value.data.socios] } }
         );
-        console.log(response);
         document.getElementById('closeModal')!.click();
         this.SocioForm.reset(this.SocioForm.value);
         this.isLoading.next(false);
         return {dataState: DataState.LOADED_STATE, appData: this.dataSubject.value}
       }),
-      startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
+      startWith({ dataState: DataState.LOADING_STATE, appData: this.dataSubject.value }),
       catchError((error: string) => {
         this.isLoading.next(false);
         return of({dataState: DataState.ERROR_STATE, error})
