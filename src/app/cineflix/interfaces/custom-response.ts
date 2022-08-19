@@ -4,8 +4,8 @@ export interface CustomResponse {
     timestamp: Date;
     statusCode: number;
     status: String;
-    reason?: String;
+    reason: String;
     message: String;
-    developerMessage?: String;
+    developerMessage: String;
     data: Socio;
 }

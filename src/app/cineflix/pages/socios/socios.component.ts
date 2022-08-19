@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, catchError, map, Observable, of, startWith } from 'rxjs';
 import { DataState } from '../../../cineflix/enum/data-state';
 import { AppState } from '../../../cineflix/interfaces/app-state';
@@ -46,23 +46,13 @@ export class SociosComponent implements OnInit {
     );
   }
 
-  saveSocio(): void{
+  saveSocio(){
     this.isLoading.next(true);
     console.log(this.SocioForm.value);
-    const { cedula, nombre, direccion, telefono, correo } = this.SocioForm.value;
-    this.appState$ = this.crudService.saveSocio$({
-    cedula,
-      "nombre": nombre,
-      "direccion": direccion,
-      "telefono":telefono,
-      "correo": correo,
-      "created_at": new Date(),
-      "updated_at": new Date()
-    })
+    this.appState$ = this.crudService.saveSocio$(this.SocioForm.value as Socio)
     .pipe(
       map(response => {
         console.log(response);
-        this.dataSubject.next(response);
         document.getElementById('closeModal')!.click();
         this.SocioForm.reset(this.SocioForm.value);
         this.isLoading.next(false);
