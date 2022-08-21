@@ -58,6 +58,14 @@ export class CrudService {
     catchError(this.handleError)
   );
 
+
+  updateDirector$ = (director: Director) => <Observable<CustomResponse>>
+  this.http.put<CustomResponse>(`${this.apiURL}/director/update`, director)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
   deleteDirector$ = (directorId: number) => <Observable<CustomResponse>>
   this.http.delete<CustomResponse>(`${this.apiURL}/director/delete/${directorId}`)
   .pipe(
@@ -110,6 +118,13 @@ export class CrudService {
 
   saveSexo$ = (sexo: Sexo) => <Observable<CustomResponse>>
   this.http.post<CustomResponse>(`${this.apiURL}/sexo/save`, sexo)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  updateSexo$ = (sexo: Sexo) => <Observable<CustomResponse>>
+  this.http.put<CustomResponse>(`${this.apiURL}/sexo/update`, sexo)
   .pipe(
     tap(console.log),
     catchError(this.handleError)

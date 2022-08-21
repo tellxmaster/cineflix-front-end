@@ -1,8 +1,97 @@
-<div class="container-fluid">
-    <div class="col bg-light text-dark">
-        <h1>Directores</h1>
-        <div>
-            {{ appState$ | async | json }}
+
+<div class="container-fluid  p-4 animate__animated animate__fadeInDown">
+    <div class="table-responsive-sm">
+        <div class="table-title">
+            <div class="row">
+                <div class="col col-sm-6">
+                    <h1>Directores <i class="fas fa-users"></i></h1>
+                </div>
+                <div class="col col-sm-6">
+                    <a href="#addDirectorModal" class="btn btn-danger btn-sm float-right" data-toggle="modal" (click)="setShowGuardar()">
+                        <i class="fas fa-plus mr-2"></i>
+                        <span>Añadir Director</span>
+                    </a>
+                </div>
+            </div>
         </div>
+        <br>
+
+        <ng-container *ngIf="( appState$ | async ) as appState" [ngSwitch]="appState.dataState">
+            <ng-container *ngSwitchCase="DataState.LOADING_STATE">
+                <div class="col-md-12 single-note-item text-center">
+                    <div class="spinner-border text-danger" role="status"></div>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="DataState.LOADED_STATE">
+
+                <table class="table table-hover" id="socios">
+                    <thead class="bg-danger">
+                        <tr class="text-center">
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let director of $any(appState.appData?.data.directores | slice:desde:hasta) ; let i = index"
+                        class="bg-light">
+                        <tr class="text-center">
+                            <!-- <th scope="row">{{socio.id}}</th> -->
+                            <td scope="row">{{director.id}}</td>
+                            <td scope="row">{{director.dir_nombre}}</td>
+                            <td scope="row">
+                                <a class="text-success mr-4" role="button" href="#addDirectorModal" data-toggle="modal" (click)="getData(director)"><i class="fas fa-pen"></i></a>
+                                <a class="text-secondary h6 ml-1" role="button"><i class="fas fa-times" (click)="deleteDirector(director)"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <mat-paginator class="paginator" [length]="appState.appData?.data.directores.length" [pageSize]="pageSize"
+                    (page)="cambiarPagina($event)" aria-label="Select page">
+                </mat-paginator>
+            </ng-container>
+            <ng-container *ngSwitchCase="DataState.ERROR_STATE">
+                <div class="alert alert-danger">
+                    {{ appState.error }}
+                </div>
+            </ng-container>
+        </ng-container>
     </div>
+</div>
+
+<div id="addDirectorModal" class="modal fade">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <form [formGroup]="DirectorForm" (ngSubmit)="saveDirector()" autocomplete="off">
+            <div class="modal-header">
+                <h4 class="modal-title">Añadir Director <i class="fas fa-users"></i></h4>
+                <button type="button" class="close" data-dismiss="modal" id="closeModal"
+                    aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="form-group">
+                    <label for="sex_nombre">Nombre Director</label>
+                    <input type="text" name="dir_nombre" formControlName="dir_nombre" class="form-control" required>
+                </div>
+                
+                <div class="form-group float-right">
+                    <button *ngIf="showGuardar" class="btn btn-danger mr-3" type="submit"
+                        [disabled]="DirectorForm.invalid || (isLoading$ | async)">
+                        <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+                        <span *ngIf="isLoading$ | async">Guardando...</span>
+                        <span *ngIf="!(isLoading$ | async)">Guardar</span>
+                    </button>
+                    <button *ngIf="showEditar" class="btn btn-danger mr-3" type="submit"
+                        [disabled]="DirectorForm.invalid || (isLoading$ | async)">
+                        <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+                        <span *ngIf="izsLoading$ | async">Editando...</span>
+                        <span *ngIf="!(isLoading$ | async)">Editar</span>
+                    </button>
+                    <a class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 </div>
