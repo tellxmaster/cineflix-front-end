@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { interceptorProvider } from './auth/services/interceptor.service';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { interceptorProvider } from './auth/services/interceptor.service';
     AppRoutingModule,
     HttpClientModule,
     AuthModule,
-    SharedModule
+    SharedModule,
+    MatPaginatorModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]

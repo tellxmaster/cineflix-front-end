@@ -69,7 +69,7 @@ export class CrudService {
 
   //SOCIOS
   socios$ = <Observable<CustomResponse>>
-  this.http.get<CustomResponse>(`${this.apiURL}/socio/list/${this.page}`)
+  this.http.get<CustomResponse>(`${this.apiURL}/socio/list`)
   .pipe(
     tap(console.log),
     catchError(this.handleError)

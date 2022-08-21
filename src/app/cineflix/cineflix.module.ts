@@ -17,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MainComponent } from './pages/main/main.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CineflixRoutingModule,
     SharedModule,
     ReactiveFormsModule,
+    MatPaginatorModule
   ]
 })
 export class CineflixModule { }
