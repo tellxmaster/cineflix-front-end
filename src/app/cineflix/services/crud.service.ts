@@ -7,6 +7,8 @@ import { Actor } from '../interfaces/actor';
 import { Director } from '../interfaces/director';
 import { Sexo } from '../interfaces/sexo';
 import { ActivatedRoute } from '@angular/router';
+import { Formato } from '../interfaces/formato';
+import { Genero } from '../interfaces/genero';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,7 @@ export class CrudService {
 
   //ACTORES
   actores$ = <Observable<CustomResponse>>
-  this.http.get<CustomResponse>(`${this.apiURL}/actor/list/${this.page}`)
+  this.http.get<CustomResponse>(`${this.apiURL}/actor/list`)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
@@ -138,6 +140,71 @@ export class CrudService {
   );
 
   //FIN SEXOS
+
+  //FORMATO
+
+  formatos$ = <Observable<CustomResponse>>
+  this.http.get<CustomResponse>(`${this.apiURL}/formato/list`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  saveFormato$ = (formato: Formato) => <Observable<CustomResponse>>
+  this.http.post<CustomResponse>(`${this.apiURL}/formato/save`, formato)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  updateFormato$ = (formato: Formato) => <Observable<CustomResponse>>
+  this.http.put<CustomResponse>(`${this.apiURL}/formato/update`, formato)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  deleteFormato$ = (formatoId: number) => <Observable<CustomResponse>>
+  this.http.delete<CustomResponse>(`${this.apiURL}/formato/delete/${formatoId}`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  //FIN FORMATO
+
+  //GENERO
+  generos$ = <Observable<CustomResponse>>
+  this.http.get<CustomResponse>(`${this.apiURL}/genero/list`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  saveGenero$ = (genero: Genero) => <Observable<CustomResponse>>
+  this.http.post<CustomResponse>(`${this.apiURL}/genero/save`, genero)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  updateGenero$ = (genero: Genero) => <Observable<CustomResponse>>
+  this.http.put<CustomResponse>(`${this.apiURL}/genero/update`, genero)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  deleteGenero$ = (generoId: number) => <Observable<CustomResponse>>
+  this.http.delete<CustomResponse>(`${this.apiURL}/genero/delete/${generoId}`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+  //FIN GENERO
+
+
+  
   private handleError(error: HttpErrorResponse): Observable<never>{
     console.log(error);
     return throwError(`Ocurrio un Error - Codigo: ${error.status}`);
