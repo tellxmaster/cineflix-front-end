@@ -5,8 +5,6 @@ export interface Socio {
     direccion: String;
     telefono: String;
     correo: String;
-    updated_at: Date;
-    created_at: Date;
 }
 
 export interface SocioSend {
@@ -15,7 +13,5 @@ export interface SocioSend {
     direccion: String;
     telefono: String;
     correo: String;
-    updated_at: Date;
-    created_at: Date;
 }
 

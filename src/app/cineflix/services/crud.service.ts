@@ -82,6 +82,13 @@ export class CrudService {
     catchError(this.handleError)
   );
 
+  updateSocio$ = (socio: Socio) => <Observable<CustomResponse>>
+  this.http.put<CustomResponse>(`${this.apiURL}/socio/update`, socio)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
   deleteSocio$ = (socioId: number) => <Observable<CustomResponse>>
   this.http.delete<CustomResponse>(`${this.apiURL}/socio/delete/${socioId}`)
   .pipe(

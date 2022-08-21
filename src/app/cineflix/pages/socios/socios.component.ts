@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, Observable, of, startWith } from 'rxjs';
 import { DataState } from '../../../cineflix/enum/data-state';
 import { AppState } from '../../../cineflix/interfaces/app-state';
@@ -22,6 +22,8 @@ export class SociosComponent implements OnInit {
   private dataSubject = new BehaviorSubject<CustomResponse>(null!);
   private isLoading = new BehaviorSubject<boolean>(false);
   private isEditing = new BehaviorSubject<boolean>(false);
+  private socio!: Socio;
+  private editId!: number;
   showGuardar!: boolean;
   showEditar!: boolean;
   isLoading$ = this.isLoading.asObservable();
@@ -56,25 +58,57 @@ export class SociosComponent implements OnInit {
   }
 
   saveSocio(){
-    this.isLoading.next(true);
-    console.log(this.SocioForm.value);
-    this.appState$ = this.crudService.saveSocio$(this.SocioForm.value as Socio)
-    .pipe(
-      map(response => {
-        this.dataSubject.next(
-          {...response, data: { socios: [response.data.socio, ...this.dataSubject.value.data.socios] } }
-        );
-        document.getElementById('closeModal')!.click();
-        this.SocioForm.reset(this.SocioForm.value);
-        this.isLoading.next(false);
-        return {dataState: DataState.LOADED_STATE, appData: this.dataSubject.value}
-      }),
-      startWith({ dataState: DataState.LOADING_STATE, appData: this.dataSubject.value }),
-      catchError((error: string) => {
-        this.isLoading.next(false);
-        return of({dataState: DataState.ERROR_STATE, error})
-      })
-    );
+    if(this.showGuardar){
+      this.isLoading.next(true);
+      console.log(this.SocioForm.value);
+      this.appState$ = this.crudService.saveSocio$(this.SocioForm.value as Socio)
+      .pipe(
+        map(response => {
+          this.dataSubject.next(
+            {...response, data: { socios: [response.data.socio, ...this.dataSubject.value.data.socios] } }
+          );
+          document.getElementById('closeModal')!.click();
+          this.SocioForm.reset(this.SocioForm.value);
+          this.isLoading.next(false);
+          return {dataState: DataState.LOADED_STATE, appData: this.dataSubject.value}
+        }),
+        startWith({ dataState: DataState.LOADING_STATE, appData: this.dataSubject.value }),
+        catchError((error: string) => {
+          this.isLoading.next(false);
+          return of({dataState: DataState.ERROR_STATE, error})
+        })
+      );
+    }else{
+      console.log("Editando");
+      this.isLoading.next(true);
+      const {cedula, nombre, direccion, telefono, correo} = this.SocioForm.value;
+      this.socio = {
+        "id": this.editId,
+        "cedula":    cedula,
+        "nombre":    nombre,
+        "direccion": direccion,
+        "telefono":  telefono,
+        "correo":    correo
+      }
+      this.appState$ = this.crudService.updateSocio$(this.socio)
+      .pipe(
+        map(response => {
+          this.dataSubject.next(
+            {...response, data: { socios: [response.data.socio, ...this.dataSubject.value.data.socios.filter((s: Socio) => s.id !== this.socio.id)] } }
+          );
+          document.getElementById('closeModal')!.click();
+          this.SocioForm.reset(this.SocioForm.value);
+          this.isLoading.next(false);
+          
+          return {dataState: DataState.LOADED_STATE, appData: this.dataSubject.value}
+        }),
+        startWith({ dataState: DataState.LOADING_STATE, appData: this.dataSubject.value }),
+        catchError((error: string) => {
+          this.isLoading.next(false);
+          return of({dataState: DataState.ERROR_STATE, error})
+        })
+      );
+    }
   }
 
   deleteSocio(socio: Socio){
@@ -108,6 +142,8 @@ export class SociosComponent implements OnInit {
     this.showEditar = true;
     this.showGuardar = false;
     this.isLoading.next(true);
+    console.log(socio.id);
+    this.editId = socio.id;
     this.SocioForm.get('cedula')?.patchValue(socio.cedula);
     this.SocioForm.get('nombre')?.patchValue(socio.nombre);
     this.SocioForm.get('direccion')?.patchValue(socio.direccion);
