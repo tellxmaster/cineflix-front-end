@@ -5,7 +5,5 @@ export interface Pelicula {
     for_id: number;
     pel_nombre: String;
     pel_costo: number;
-    pel_fecha_estreno: Date;
-    updated_at: Date;
-    created_at: Date;
+    pel_fecha_est: Date;
 }

@@ -9,6 +9,8 @@ import { Sexo } from '../interfaces/sexo';
 import { ActivatedRoute } from '@angular/router';
 import { Formato } from '../interfaces/formato';
 import { Genero } from '../interfaces/genero';
+import { Pelicula } from '../interfaces/pelicula';
+import { Alquiler } from '../interfaces/alquiler';
 
 @Injectable({
   providedIn: 'root'
@@ -211,7 +213,67 @@ export class CrudService {
   //FIN GENERO
 
 
+  //PELICULAS
+  peliculas$ = <Observable<CustomResponse>>
+  this.http.get<CustomResponse>(`${this.apiURL}/pelicula/list`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  savePelicula$ = (pelicula: Pelicula) => <Observable<CustomResponse>>
+  this.http.post<CustomResponse>(`${this.apiURL}/pelicula/save/genero/${pelicula.gen_id}/director/${pelicula.dir_id}/formato/${pelicula.for_id}`, pelicula)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  updatePelicula$ = (pelicula: Pelicula) => <Observable<CustomResponse>>
+  this.http.put<CustomResponse>(`${this.apiURL}/pelicula/update`, pelicula)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  deletePelicula$ = (peliculaId: number) => <Observable<CustomResponse>>
+  this.http.delete<CustomResponse>(`${this.apiURL}/pelicula/delete/${peliculaId}`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+  //FIN PELICULAS
   
+  //GENERO
+  alquileres$ = <Observable<CustomResponse>>
+  this.http.get<CustomResponse>(`${this.apiURL}/alquiler/list`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  saveAlquiler$ = (alquiler: Alquiler) => <Observable<CustomResponse>>
+  this.http.post<CustomResponse>(`${this.apiURL}/alquiler/save`, alquiler)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  updateAlquiler$ = (alquiler: Alquiler) => <Observable<CustomResponse>>
+  this.http.put<CustomResponse>(`${this.apiURL}/alquiler/update`, alquiler)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  deleteAlquiler$ = (alquilerId: number) => <Observable<CustomResponse>>
+  this.http.delete<CustomResponse>(`${this.apiURL}/alquiler/delete/${alquilerId}`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+  //FIN GENERO
+
+
   private handleError(error: HttpErrorResponse): Observable<never>{
     console.log(error);
     return throwError(`Ocurrio un Error - Codigo: ${error.status}`);

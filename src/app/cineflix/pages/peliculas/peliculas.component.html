@@ -1,1 +1,140 @@
-<p>peliculas works!</p>
+<div class="container-fluid  p-4 animate__animated animate__fadeInDown">
+    <div class="table-responsive-sm">
+        <div class="table-title">
+            <div class="row">
+                <div class="col col-sm-6">
+                    <h1>Peliculas <i class="fas fa-users"></i></h1>
+                </div>
+                <div class="col col-sm-6">
+                    <a href="#addPeliculaModal" class="btn btn-danger btn-sm float-right" data-toggle="modal"
+                        (click)="setShowGuardar()">
+                        <i class="fas fa-plus mr-2"></i>
+                        <span>Añadir Pelicula</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <ng-container *ngIf="( appState$ | async ) as appState" [ngSwitch]="appState.dataState">
+            <ng-container *ngSwitchCase="DataState.LOADING_STATE">
+                <div class="col-md-12 single-note-item text-center">
+                    <div class="spinner-border text-danger" role="status"></div>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="DataState.LOADED_STATE">
+
+                <table class="table table-hover" id="socios">
+                    <thead class="bg-danger">
+                        <tr class="text-center">
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Director</th>
+                            <th scope="col">Genero</th>
+                            <th scope="col">Formato</th>
+                            <th scope="col">Fecha estreno</th>
+                            <th scope="col">Costo</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody
+                        *ngFor="let pelicula of $any(appState.appData?.data.peliculas | slice:desde:hasta) ; let i = index"
+                        class="bg-light">
+                        <tr class="text-center">
+                            <td scope="row">{{pelicula.id}}</td>
+                            <td scope="row">{{pelicula.pel_nombre}}</td>
+                            <td scope="row">{{pelicula.director.dir_nombre}}</td>
+                            <td scope="row">{{pelicula.genero.gen_nombre}}</td>
+                            <td scope="row">{{pelicula.formato.for_nombre}}</td>
+                            <td scope="row">{{pelicula.pel_fecha_est | date }}</td>
+                            <td scope="row">{{pelicula.pel_costo}}</td>
+                            <td scope="row">
+                                <a class="text-success mr-4" role="button" href="#addPeliculaModal" data-toggle="modal"
+                                    (click)="getData(pelicula)"><i class="fas fa-pen"></i></a>
+                                <a class="text-secondary h6 ml-1" role="button"><i class="fas fa-times"
+                                        (click)="deletePelicula(pelicula)"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <mat-paginator class="paginator" [length]="appState.appData?.data.peliculas.length" [pageSize]="pageSize"
+                    (page)="cambiarPagina($event)" aria-label="Select page">
+                </mat-paginator>
+            </ng-container>
+            <ng-container *ngSwitchCase="DataState.ERROR_STATE">
+                <div class="alert alert-danger">
+                    {{ appState.error }}
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>
+
+<div id="addPeliculaModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="PeliculaForm" (ngSubmit)="savePelicula()" autocomplete="off">
+                <div class="modal-header">
+                    <h4 class="modal-title">Añadir Pelicula <i class="fas fa-users"></i></h4>
+                    <button type="button" class="close" data-dismiss="modal" id="closeModal"
+                        aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="pel_nombre">Nombre Pelicula</label>
+                        <input type="text" name="pel_nombre" formControlName="pel_nombre" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dir_id">Director</label>
+                        <select formControlName="dir_id" class="form-control" id="">
+                            <option *ngFor="let director of directores ; let i = index" value={{director.id}}>{{director.dir_nombre}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dir_id">Genero</label>
+                        <select formControlName="gen_id" class="form-control" id="">
+                            <option *ngFor="let genero of generos ; let i = index" value={{genero.id}}>{{genero.gen_nombre}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="for_id">Director</label>
+                        <select formControlName="for_id" class="form-control" id="">
+                            <option *ngFor="let formato of formatos ; let i = index" value={{formato.id}}>{{formato.for_nombre}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pel_fecha_est">Fecha estreno</label>
+                        <input type="date" [ngModel]="fechaEstreno | date:'yyyy-MM-dd'" name="pel_fecha_est" formControlName="pel_fecha_est" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pel_costo">Costo</label>
+                        <input type="number" name="pel_costo" formControlName="pel_costo" class="form-control" required>
+                    </div>
+
+                    <div class="form-group float-right">
+                        <button *ngIf="showGuardar" class="btn btn-danger mr-3" type="submit"
+                            [disabled]="PeliculaForm.invalid || (isLoading$ | async)">
+                            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+                            <span *ngIf="isLoading$ | async">Guardando...</span>
+                            <span *ngIf="!(isLoading$ | async)">Guardar</span>
+                        </button>
+                        <button *ngIf="showEditar" class="btn btn-danger mr-3" type="submit"
+                            [disabled]="PeliculaForm.invalid || (isLoading$ | async)">
+                            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+                            <span *ngIf="izsLoading$ | async">Editando...</span>
+                            <span *ngIf="!(isLoading$ | async)">Editar</span>
+                        </button>
+                        <a class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
