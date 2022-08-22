@@ -6,6 +6,4 @@ export interface Alquiler {
     alq_fecha_hasta: Date;
     alq_valor: number;
     alq_fecha_entrega: Date;
-    updated_at: Date;
-    created_at: Date;
 }

@@ -7,8 +7,6 @@ import { AppState } from '../../../cineflix/interfaces/app-state';
 import { CustomResponse } from '../../../cineflix/interfaces/custom-response';
 import { CrudService } from '../../../cineflix/services/crud.service';
 import { Genero } from '../../interfaces/genero';
-import { Actor } from '../../interfaces/actor';
-import { Sexo } from '../../interfaces/sexo';
 import { Formato } from '../../interfaces/formato';
 import { Director } from '../../interfaces/director';
 import { Pelicula } from '../../interfaces/pelicula';
@@ -191,7 +189,7 @@ export class PeliculasComponent implements OnInit {
     console.log(pelicula.dir_id);
     this.PeliculaForm.get('gen_id')?.setValue(pelicula.gen_id);
     this.PeliculaForm.get('for_id')?.setValue(pelicula.for_id);
-    this.fechaEstreno = pelicula.pel_fecha_est;
+    this.fechaEstreno = pelicula.pel_fecha_est!;
     this.PeliculaForm.get('pel_costo')?.patchValue(pelicula.pel_costo);
     this.isLoading.next(false);
     

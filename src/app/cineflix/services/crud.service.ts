@@ -252,7 +252,7 @@ export class CrudService {
   );
 
   saveAlquiler$ = (alquiler: Alquiler) => <Observable<CustomResponse>>
-  this.http.post<CustomResponse>(`${this.apiURL}/alquiler/save`, alquiler)
+  this.http.post<CustomResponse>(`${this.apiURL}/alquiler/save/socio/${alquiler.soc_id}/pelicula/${alquiler.pel_id}`, alquiler)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
