@@ -77,12 +77,13 @@
 
                     <div class="form-group">
                         <label for="act_nombre">Nombre Actor</label>
-                        <input type="text" name="act_nombre" formControlName="act_nombre" class="form-control" required>
+                        <input type="text" name="act_nombre" placeholder="Nombre Actor" formControlName="act_nombre" class="form-control" required>
                     </div>
 
                     <div class="form-group">
                         <label for="sex_id">Sexo Actor</label>
-                        <select formControlName="sex_id" class="form-control" id="">
+                        <select formControlName="sex_id" class="form-select" [ngModel]="null">
+                            <option [ngValue]="null" disabled>Seleccione el Sexo</option>
                             <option *ngFor="let sexo of sexos ; let i = index" value={{sexo.id}}>{{sexo.sex_nombre}}</option>
                         </select>
                     </div>

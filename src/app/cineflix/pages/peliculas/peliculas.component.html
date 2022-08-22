@@ -84,26 +84,29 @@
 
                     <div class="form-group">
                         <label for="pel_nombre">Nombre Pelicula</label>
-                        <input type="text" name="pel_nombre" formControlName="pel_nombre" class="form-control" required>
+                        <input type="text" name="pel_nombre" formControlName="pel_nombre" class="form-control" placeholder="Nombre Pelicula" required>
                     </div>
 
                     <div class="form-group">
                         <label for="dir_id">Director</label>
-                        <select formControlName="dir_id" class="form-control" id="">
+                        <select formControlName="dir_id" class="form-select" [ngModel]='null'>
+                            <option [ngValue]="null" disabled>Seleccione el Director</option>
                             <option *ngFor="let director of directores ; let i = index" value={{director.id}}>{{director.dir_nombre}}</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="dir_id">Genero</label>
-                        <select formControlName="gen_id" class="form-control" id="">
+                        <select formControlName="gen_id" class="form-select" [ngModel]='null'>
+                            <option [ngValue]="null" disabled>Seleccione el Genero</option>
                             <option *ngFor="let genero of generos ; let i = index" value={{genero.id}}>{{genero.gen_nombre}}</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="for_id">Director</label>
-                        <select formControlName="for_id" class="form-control" id="">
+                        <label for="for_id">Formato</label>
+                        <select formControlName="for_id" class="form-select" [ngModel]="(genero)?genero:null">
+                            <option [ngValue]="null" disabled>Seleccione el Formato</option>
                             <option *ngFor="let formato of formatos ; let i = index" value={{formato.id}}>{{formato.for_nombre}}</option>
                         </select>
                     </div>
@@ -115,7 +118,7 @@
 
                     <div class="form-group">
                         <label for="pel_costo">Costo</label>
-                        <input type="number" name="pel_costo" formControlName="pel_costo" class="form-control" required>
+                        <input type="number" name="pel_costo" formControlName="pel_costo" class="form-control" placeholder="Precio" required>
                     </div>
 
                     <div class="form-group float-right">

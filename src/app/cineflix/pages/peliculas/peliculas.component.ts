@@ -27,6 +27,7 @@ export class PeliculasComponent implements OnInit {
   public directores: Director[] = [];
   public formatos: Formato[] = [];
   public generos: Genero[] = [];
+  public genero!: number;
   private pelicula!: Pelicula;
   private editId!: number;
   showGuardar!: boolean;
@@ -185,10 +186,9 @@ export class PeliculasComponent implements OnInit {
     console.log(pelicula.id);
     this.editId = pelicula.id;
     this.PeliculaForm.get('pel_nombre')?.patchValue(pelicula.pel_nombre);
-    this.PeliculaForm.get('dir_id')?.setValue(pelicula.dir_id);
-    console.log(pelicula.dir_id);
-    this.PeliculaForm.get('gen_id')?.setValue(pelicula.gen_id);
-    this.PeliculaForm.get('for_id')?.setValue(pelicula.for_id);
+    this.PeliculaForm.get('dir_id')?.setValue(pelicula.director?.id);
+    this.PeliculaForm.get('gen_id')?.setValue(pelicula.genero?.id);
+    this.PeliculaForm.get('for_id')?.setValue(pelicula.formato?.id);
     this.fechaEstreno = pelicula.pel_fecha_est!;
     this.PeliculaForm.get('pel_costo')?.patchValue(pelicula.pel_costo);
     this.isLoading.next(false);

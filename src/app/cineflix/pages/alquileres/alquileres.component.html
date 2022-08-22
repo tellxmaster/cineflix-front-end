@@ -84,14 +84,16 @@
 
                     <div class="form-group">
                         <label for="soc_id">Socio</label>
-                        <select formControlName="soc_id" class="form-control" id="">
+                        <select formControlName="soc_id" class="form-select" [ngModel]="null">
+                            <option [ngValue]="null" disabled>Seleccione el Socio</option>
                             <option *ngFor="let socio of socios ; let i = index" value={{socio.id}}>{{socio.nombre}}</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="pel_id">Director</label>
-                        <select formControlName="pel_id" class="form-control" id="">
+                        <label for="pel_id">Pelicula</label>
+                        <select formControlName="pel_id" class="form-select" [ngModel]="null">
+                            <option [ngValue]="null" disabled>Seleccione la Pelicula</option>
                             <option *ngFor="let pelicula of peliculas ; let i = index" value={{pelicula.id}}>{{pelicula.pel_nombre}}</option>
                         </select>
                     </div>
@@ -108,7 +110,7 @@
 
                     <div class="form-group">
                         <label for="alq_valor">Costo</label>
-                        <input type="number" name="alq_valor" formControlName="alq_valor" class="form-control" required>
+                        <input type="number" name="alq_valor" placeholder="Costo" formControlName="alq_valor" class="form-control" required>
                     </div>
 
                     <div class="form-group">

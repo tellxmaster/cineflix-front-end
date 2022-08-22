@@ -154,8 +154,8 @@ export class ActoresComponent implements OnInit {
     this.isLoading.next(true);
     console.log(actor.id);
     this.editId = actor.id;
-    this.ActorForm.get('gen_nombre')?.patchValue(actor.act_nombre);
-    this.ActorForm.get('gen_nombre')?.patchValue(actor.sex_id);
+    this.ActorForm.get('act_nombre')?.patchValue(actor.act_nombre);
+    this.ActorForm.get('sex_id')?.patchValue(actor.sexo?.id);
     this.isLoading.next(false);
   }
 

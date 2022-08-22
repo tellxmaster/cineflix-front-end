@@ -38,7 +38,7 @@ export class CrudService {
   );
 
   updateActor$ = (actor: Actor) => <Observable<CustomResponse>>
-  this.http.put<CustomResponse>(`${this.apiURL}/actor/update`, actor)
+  this.http.put<CustomResponse>(`${this.apiURL}/actor/update/sexo/${actor.sex_id}`, actor)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
@@ -229,7 +229,7 @@ export class CrudService {
   );
 
   updatePelicula$ = (pelicula: Pelicula) => <Observable<CustomResponse>>
-  this.http.put<CustomResponse>(`${this.apiURL}/pelicula/update`, pelicula)
+  this.http.put<CustomResponse>(`${this.apiURL}/pelicula/update/genero/${pelicula.gen_id}/director/${pelicula.dir_id}/formato/${pelicula.for_id}`, pelicula)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
@@ -259,7 +259,7 @@ export class CrudService {
   );
 
   updateAlquiler$ = (alquiler: Alquiler) => <Observable<CustomResponse>>
-  this.http.put<CustomResponse>(`${this.apiURL}/alquiler/update`, alquiler)
+  this.http.put<CustomResponse>(`${this.apiURL}/alquiler/update/socio/${alquiler.soc_id}/pelicula/${alquiler.pel_id}`, alquiler)
   .pipe(
     tap(console.log),
     catchError(this.handleError)

@@ -131,6 +131,7 @@ export class AlquileresComponent implements OnInit {
           this.dataSubject.next(
             {...response, data: { alquileres: [response.data.alquiler, ...this.dataSubject.value.data.alquileres.filter((a: Alquiler) => a.id !== this.alquiler.id)] } }
           );
+          console.log("Update: \n"+ response);
           document.getElementById('closeModal')!.click();
           this.AlquilerForm.reset(this.AlquilerForm.value);
           this.isLoading.next(false);
@@ -177,15 +178,15 @@ export class AlquileresComponent implements OnInit {
     this.showEditar = true;
     this.showGuardar = false;
     this.isLoading.next(true);
-    console.log(alquiler.id);
     this.editId = alquiler.id;
-    this.AlquilerForm.get('soc_id')?.patchValue(alquiler.soc_id);
-    this.AlquilerForm.get('pel_id')?.setValue(alquiler.pel_id);
+    this.AlquilerForm.get('soc_id')?.patchValue(alquiler.socio?.id);
+    this.AlquilerForm.get('pel_id')?.patchValue(alquiler.peliculaAlq?.id);
     this.fechaDesde = alquiler.alq_fecha_desde;
     this.fechaHasta = alquiler.alq_fecha_hasta;
     this.AlquilerForm.get('alq_valor')?.patchValue(alquiler.alq_valor);
     this.fechaEntrega = alquiler.alq_fecha_entrega;
     this.isLoading.next(false);
+    console.log(alquiler);
     
   }
 
