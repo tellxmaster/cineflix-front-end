@@ -29,7 +29,14 @@ export class CrudService {
   );
 
   saveActor$ = (actor: Actor) => <Observable<CustomResponse>>
-  this.http.post<CustomResponse>(`${this.apiURL}/actor/save`, actor)
+  this.http.post<CustomResponse>(`${this.apiURL}/actor/save/sexo/${actor.sex_id}`, actor)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  updateActor$ = (actor: Actor) => <Observable<CustomResponse>>
+  this.http.put<CustomResponse>(`${this.apiURL}/actor/update`, actor)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
